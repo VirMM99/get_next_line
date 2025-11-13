@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_gnl.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimirand <vimirand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 12:49:16 by vimirand          #+#    #+#             */
-/*   Updated: 2025/11/06 16:09:22 by vimirand         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:00:52 by vimirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 // int	open(const char *path, int flags)
-
 // ssize_t	read(int fildes, void *buf, size_t nbytes)
-
-
 
 int	main()
 {
-	int	fd;
+	int		fd;
+	char	*felipes;
 	
-	fd = open("my_text", O_RDONLY);
-	char buff[100];
-	read(fd, buff, 80);
-	printf("%s\n", buff);
-	
-	return (fd);
+	fd = open("retrograde_mercury", O_RDONLY);
+	while (1)
+	{
+		felipes = get_next_line(fd);
+		if (!felipes)
+			break;
+		printf("%s\n", felipes);
+		free(felipes);
+	}
+	return (0);
 }
