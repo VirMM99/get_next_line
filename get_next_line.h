@@ -6,16 +6,16 @@
 /*   By: vimirand <vimirand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:13:32 by vimirand          #+#    #+#             */
-/*   Updated: 2025/11/13 19:24:23 by vimirand         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:25:59 by vimirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 				//Inclusiones necesarias
 # include <stdlib.h> //MALLOC

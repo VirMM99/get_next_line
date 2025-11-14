@@ -6,17 +6,30 @@
 /*   By: vimirand <vimirand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:13:56 by vimirand          #+#    #+#             */
-/*   Updated: 2025/11/13 20:00:46 by vimirand         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:49:10 by vimirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_read_this(char **stash, int fd)
+static int	ft_mini_read_this(char **stash, char **read_text, char **temp,
+	ssize_t char_read)
+{
+	(*read_text)[char_read] = '\0';
+	if (!*stash)
+		*temp = ft_strdup(*read_text);
+	else
+		*temp = ft_strjoin(*stash, *read_text);
+	if (!*temp)
+		return (-1);
+	return (0);
+}
+
+static int	ft_read_this(char **stash, int fd)
 {
 	ssize_t	char_read;
 	char	*temp;
-	char *read_text;
+	char	*read_text;
 
 	read_text = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (read_text == NULL)
@@ -30,12 +43,7 @@ int	ft_read_this(char **stash, int fd)
 			free(read_text);
 			return (-1);
 		}
-		read_text[char_read] = '\0';
-		if (!*stash)
-			temp = ft_strdup(read_text);
-		else
-			temp = ft_strjoin(*stash, read_text);
-		if (!temp)
+		if (ft_mini_read_this(stash, &read_text, &temp, char_read) == -1)
 			return (-1);
 		free(*stash);
 		*stash = temp;
@@ -46,7 +54,7 @@ int	ft_read_this(char **stash, int fd)
 	return (1);
 }
 
-void	ft_divide_text(char **stash, char **line, char **leftover)
+static void	ft_divide_text(char **stash, char **line, char **leftover)
 {
 	size_t	i;
 	size_t	len;
@@ -72,11 +80,11 @@ void	ft_divide_text(char **stash, char **line, char **leftover)
 	}
 }
 
-char *ft_get_the_line(char **stash)
+static char	*ft_get_the_line(char **stash)
 {
 	char	*leftover;
 	char	*line;
-	
+
 	if (!stash || !*stash || !**stash)
 	{
 		if (!stash || !*stash)
@@ -86,7 +94,7 @@ char *ft_get_the_line(char **stash)
 		}
 		return (NULL);
 	}
-	else 
+	else
 		ft_divide_text(stash, &line, &leftover);
 	free(*stash);
 	if (leftover && !*leftover)
@@ -106,9 +114,9 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	flag = ft_read_this(&stash, fd);
-	if(flag == -1 || !stash || !*stash) 
+	if (flag == -1 || !stash || !*stash)
 	{
-		if(stash)
+		if (stash)
 		{
 			free(stash);
 			stash = NULL;

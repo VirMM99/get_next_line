@@ -6,7 +6,7 @@
 /*   By: vimirand <vimirand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:14:10 by vimirand          #+#    #+#             */
-/*   Updated: 2025/11/13 19:58:36 by vimirand         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:29:09 by vimirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	ft_strlen(char *s)
 		i++;
 	return (i);
 }
+
 char	*ft_strdup(char *s1)
 {
 	char	*s2;
@@ -47,7 +48,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	len1;
 	size_t	len2;
-	
+
 	i = 0;
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -67,6 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	s3[i] = '\0';
 	return (s3);
 }
+
 char	*ft_substr(char *s, size_t start, size_t len)
 {
 	size_t	i;
@@ -77,9 +79,9 @@ char	*ft_substr(char *s, size_t start, size_t len)
 	if (start >= ft_strlen(s))
 	{
 		s = (malloc((sizeof(char)) * 1));
-		if(s != NULL)
+		if (s != NULL)
 			s[0] = '\0';
-		return s;
+		return (s);
 	}
 	if (len >= ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
@@ -95,6 +97,7 @@ char	*ft_substr(char *s, size_t start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
+
 char	*ft_strchr(char *s, char c)
 {
 	size_t	i;
@@ -112,5 +115,3 @@ char	*ft_strchr(char *s, char c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
-
-
